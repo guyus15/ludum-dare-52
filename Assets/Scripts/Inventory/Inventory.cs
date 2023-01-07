@@ -27,8 +27,6 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item)
     {
-        Debug.Log($"Adding {item.name} to inventory.");
-
         if (items.Count >= defaultSpace)
         {
             return false;

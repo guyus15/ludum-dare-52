@@ -25,6 +25,15 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
         EventManager.Broadcast(spawnEvt);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var seed = Resources.Load<Item>("Items/Scriptable Objects/CropSeed");
+            Inventory.instance.Add(seed);
+        }
+    }
+
     void FixedUpdate()
     {
         Move();

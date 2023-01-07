@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour, IMoveable, IDamagable
 {
@@ -11,12 +13,16 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
     public int CurrentHealth { get; private set; }
 
     private bool _canBeDamaged;
-    private Rigidbody2D _rb2d;
+    private NavMeshAgent _agent;
+    private float _moveSmoothingFactor = 0.3f;
 
     void Start()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
-        _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _agent= GetComponent<NavMeshAgent>();
+        _agent.speed = MoveSpeed;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
 
         CurrentHealth = MaxHealth;
 
@@ -41,17 +47,13 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
 
     public void Move()
     {
-        _rb2d.velocity = new Vector2(Input.GetAxis("Horizontal") * MoveSpeed, Input.GetAxis("Vertical") * MoveSpeed);
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
 
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        var agentDrift = 0.0001f; // minimal
+        var driftPos = movement + (Vector3)(agentDrift * Random.insideUnitCircle);
+        _agent.Move(driftPos * Time.deltaTime * _agent.speed);
 
-        mousePosition.x -= playerScreenPosition.x;
-        mousePosition.y -= playerScreenPosition.y;
-
-        float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.position = Vector3.Lerp(transform.position, _agent.nextPosition, _moveSmoothingFactor);
     }
 
     public void AddHealth(int amount)

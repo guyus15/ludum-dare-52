@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IDamagable, IMoveable
 {
@@ -16,7 +17,7 @@ public class Enemy : MonoBehaviour, IDamagable, IMoveable
     [SerializeField] private GameObject _target;
 
     private EnemyManager _enemyManager;
-    private Rigidbody2D _rb2d;
+    private NavMeshAgent _agent;
 
     private void Start()
     {
@@ -24,26 +25,28 @@ public class Enemy : MonoBehaviour, IDamagable, IMoveable
 
         _target = GameObject.Find("Player");
         _enemyManager = FindObjectOfType<EnemyManager>();
-        _rb2d = GetComponent<Rigidbody2D>();
+        _agent = GetComponent<NavMeshAgent>();
 
         _enemyManager.RegisterEnemy(this);
 
-        _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+        _agent.speed = MoveSpeed;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
     }
 
     public void Move()
     {
+        _agent.SetDestination(_target.transform.position);
+
         Vector3 targetDir = _target.transform.position - transform.position;
         targetDir.z = 0;
         float angle = Mathf.Atan2(targetDir.x, targetDir.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, -transform.forward);
-
-        _rb2d.velocity = transform.up * MoveSpeed;
     }
 
     public void AddHealth(int amount)

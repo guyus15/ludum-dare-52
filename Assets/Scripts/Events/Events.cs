@@ -5,6 +5,7 @@
     public static readonly PlayerHitEvent s_PlayerHitEvent = new PlayerHitEvent();
     public static readonly PlayerDeathEvent s_PlayerDeathEvent = new PlayerDeathEvent();
     public static readonly EnemyDeathEvent s_EnemyDeathEvent = new EnemyDeathEvent();
+    public static readonly PlantGrowthEvent s_PlantGrowthEvent = new PlantGrowthEvent();
     public static readonly InitialiseUIEvent s_InitialiseUIEvent = new InitialiseUIEvent();
 }
 
@@ -31,4 +32,5 @@ public class EnemyDeathEvent : GameEvent
     public float xPos, yPos;
 }
 
+public class PlantGrowthEvent : GameEvent { }
 public class InitialiseUIEvent : GameEvent { }

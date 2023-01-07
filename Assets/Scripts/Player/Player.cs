@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour, IMoveable, IDamagable
 {
@@ -48,7 +49,9 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
 
-        _agent.Move(movement * Time.deltaTime * _agent.speed);
+        var agentDrift = 0.0001f; // minimal
+        var driftPos = movement + (Vector3)(agentDrift * Random.insideUnitCircle);
+        _agent.Move(driftPos * Time.deltaTime * _agent.speed);
 
         transform.position = Vector3.Lerp(transform.position, _agent.nextPosition, _moveSmoothingFactor);
     }

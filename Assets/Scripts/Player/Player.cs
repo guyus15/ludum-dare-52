@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour, IMoveable, IDamagable
 {
@@ -13,8 +12,9 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
     public int CurrentHealth { get; private set; }
 
     private bool _canBeDamaged;
-    private NavMeshAgent _agent;
     private float _moveSmoothingFactor = 0.3f;
+    private NavMeshAgent _agent;
+    private Animator _animator;
 
     void Start()
     {
@@ -23,6 +23,8 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
         _agent.updatePosition = false;
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+
+        _animator = GetComponent<Animator>();
 
         CurrentHealth = MaxHealth;
 
@@ -47,13 +49,30 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
 
     public void Move()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        bool facingLeft = horizontal < 0;
+        bool facingRight = horizontal > 0;
+        bool facingUp = vertical > 0;
+        bool facingDown = vertical < 0;
+
+        Vector3 movement = new Vector3(horizontal, vertical, 0.0f);
 
         var agentDrift = 0.0001f; // minimal
         var driftPos = movement + (Vector3)(agentDrift * Random.insideUnitCircle);
         _agent.Move(driftPos * Time.deltaTime * _agent.speed);
 
         transform.position = Vector3.Lerp(transform.position, _agent.nextPosition, _moveSmoothingFactor);
+
+        // Update animator
+        _animator.SetFloat("HorizontalMovement", horizontal);
+        _animator.SetFloat("VerticalMovement", vertical);
+        _animator.SetBool("IsRunning", horizontal != 0 || vertical != 0);
+        _animator.SetBool("FacingLeft", facingLeft);
+        _animator.SetBool("FacingRight", facingRight);
+        _animator.SetBool("FacingUp", facingUp);
+        _animator.SetBool("FacingDown", facingDown);
     }
 
     public void AddHealth(int amount)

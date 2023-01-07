@@ -29,7 +29,9 @@ public class BeanPlant : MonoBehaviour, PlantInterface
     {
         //Give items and destroy self.
         var seed = Resources.Load<Item>("Items/Scriptable Objects/BeanSeed");
+        var crop = Resources.Load<Item>("Items/Scriptable Objects/Bean");
         Inventory.instance.Add(seed);
+        Inventory.instance.Add(crop);
         Destroy(gameObject);
     }
 }

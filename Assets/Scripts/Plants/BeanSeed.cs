@@ -6,15 +6,17 @@ public class BeanSeed : MonoBehaviour
 {
     int currentGrowth = 0;
     int growthStages = 3;
+    public Sprite[] sprites;
     // Start is called before the first frame update
-
+    public SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
     void Awake()
     {
         EventManager.AddListener<PlantGrowthEvent>(AdvanceStage);
     }
     void Start()
     {
-        
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -25,22 +27,19 @@ public class BeanSeed : MonoBehaviour
 
     public void AdvanceStage(PlantGrowthEvent evt) 
     {
-        Debug.Log("Broadcast Recieved!");
         if (currentGrowth >= growthStages)
         {
             //Destroy self and put plant in it's place.
-            Debug.Log("Fully Grown!");
-            var newBeanPlant = Resources.Load<BeanPlant>("BeanPlant");
+            var newBeanPlant = Resources.Load<BeanPlant>("Prefabs/Plants/BeanPlant");
 
             Instantiate(newBeanPlant, transform.position, transform.rotation); //Place BeanPlant at same position as the seed.
-            Debug.Log("Bout to KMS!");
             EventManager.RemoveListener<PlantGrowthEvent>(AdvanceStage);
             Destroy(gameObject);
         }
         else
         {
             currentGrowth++;
-            Debug.Log("Growing!");
+            spriteRenderer.sprite = sprites[currentGrowth];
         }
     }
 }

@@ -14,7 +14,7 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
     {
         _item = item;
 
-        _name.text = _item.name;
+        _name.text = _item.itemName;
         _icon.sprite = _item.icon;
         _icon.enabled = true;
         _price.text = $"${_item.price}";

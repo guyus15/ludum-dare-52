@@ -26,6 +26,10 @@ public class Planter : MonoBehaviour
                     worldPos.y += 0.5f;
                     Instantiate(seed, worldPos, transform.rotation);
                     coordsBeingUsed.Add(cellPosition); //Add to the list
+
+                    // Remove this item from their inventory
+                    Inventory.instance.Remove(currentItem);
+                    Equipment.instance.ClearEquipment();
                 }
                 
             }

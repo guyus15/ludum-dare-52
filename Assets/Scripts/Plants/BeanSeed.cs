@@ -6,14 +6,17 @@ public class BeanSeed : MonoBehaviour, ISeed
 {
     int currentGrowth = 0;
     int growthStages = 3;
-
+    public Sprite[] sprites;
+    // Start is called before the first frame update
+    public SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
     void Awake()
     {
         EventManager.AddListener<PlantGrowthEvent>(AdvanceStage);
     }
     void Start()
     {
-        
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -26,8 +29,7 @@ public class BeanSeed : MonoBehaviour, ISeed
         if (currentGrowth >= growthStages)
         {
             //Destroy self and put plant in it's place.
-            Debug.Log("Fully Grown!");
-            var newBeanPlant = Resources.Load<BeanPlant>("BeanPlant");
+            var newBeanPlant = Resources.Load<BeanPlant>("Prefabs/Plants/BeanPlant");
 
             Instantiate(newBeanPlant, transform.position, transform.rotation); //Place BeanPlant at same position as the seed.
             EventManager.RemoveListener<PlantGrowthEvent>(AdvanceStage);
@@ -36,6 +38,7 @@ public class BeanSeed : MonoBehaviour, ISeed
         else
         {
             currentGrowth++;
+            Debug.Log("Growing!");
         }
     }
 }

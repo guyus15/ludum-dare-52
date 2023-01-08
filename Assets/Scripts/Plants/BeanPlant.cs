@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class BeanPlant : MonoBehaviour, PlantInterface
+public class BeanPlant : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

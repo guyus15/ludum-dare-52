@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +10,9 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
 
     [field: SerializeField, Header("Health")]
     public int MaxHealth { get; set; }
+
+    [field: SerializeField, Header("Health")]
+    public int TimeBetweenDamage { get; set; }
     public int CurrentHealth { get; private set; }
 
     private bool _canBeDamaged;
@@ -32,15 +35,8 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
         PlayerSpawnEvent spawnEvt = Events.s_PlayerSpawnEvent;
         spawnEvt.maxHealth = MaxHealth;
         EventManager.Broadcast(spawnEvt);
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var seed = Resources.Load<Item>("Items/Scriptable Objects/CropSeed");
-            Inventory.instance.Add(seed);
-        }
+        _canBeDamaged = true;
     }
 
     void FixedUpdate()
@@ -99,12 +95,16 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
         if (CurrentHealth <= 0) Die();
 
         _canBeDamaged = false;
+
+        StartCoroutine(ResetCanBeDamaged());
     }
 
     public void Die()
     {
         PlayerDeathEvent deathEvt = Events.s_PlayerDeathEvent;
         EventManager.Broadcast(deathEvt);
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -116,5 +116,12 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
                 objectInteractable.Interact();
             }
         }
+    }
+
+    IEnumerator ResetCanBeDamaged()
+    {
+        yield return new WaitForSeconds(TimeBetweenDamage);
+
+        _canBeDamaged = true;
     }
 }

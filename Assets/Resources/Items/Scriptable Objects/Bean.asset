@@ -18,3 +18,4 @@ MonoBehaviour:
   itemType: 1
   price: 50
   purchasable: 0
+  sellable: 0

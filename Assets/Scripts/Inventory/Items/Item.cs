@@ -15,6 +15,7 @@ public class Item : ScriptableObject
     public ItemType itemType;
     public int price;
     public bool purchasable;
+    public bool sellable;
 
     public virtual void Use()
     {
@@ -26,5 +27,15 @@ public class Item : ScriptableObject
     {
         // Buy the item
         Shop.instance.Purchase(this);
+
+        Shop.instance.onUpdateUICallback.Invoke();
+    }
+
+    public virtual void Sell()
+    {
+        // Sell the item
+        Merchant.instance.Sell(this);
+
+        Merchant.instance.onUpdateUICallback.Invoke();
     }
 }

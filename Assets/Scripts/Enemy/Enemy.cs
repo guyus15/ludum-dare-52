@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMoveable
 
     public void Move()
     {
+        if (_target == null) return;
+
         _agent.SetDestination(_target.transform.position);
 
         Vector3 targetDir = _target.transform.position - transform.position;
@@ -72,12 +74,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMoveable
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision == null) return;
-
-        if (collision.gameObject.CompareTag("Player")) return;
-
         if (collision.gameObject.transform.TryGetComponent<IDamagable>(out var objectDamagable))
         {
             objectDamagable.RemoveHealth(_damagePerHit);

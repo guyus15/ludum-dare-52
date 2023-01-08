@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MerchantItem : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private TMPro.TextMeshProUGUI _name;
     [SerializeField] private Image _icon;
     [SerializeField] private TMPro.TextMeshProUGUI _price;
 
@@ -13,6 +14,7 @@ public class MerchantItem : MonoBehaviour, IPointerClickHandler
     {
         _item = item;
 
+        _name.text = _item.name;
         _icon.sprite = _item.icon;
         _icon.enabled = true;
         _price.text = $"${_item.price}";
@@ -22,6 +24,7 @@ public class MerchantItem : MonoBehaviour, IPointerClickHandler
     {
         _item = null;
 
+        _name.text = "";
         _icon.sprite = null;
         _icon.enabled = false;
         _price.text = "";

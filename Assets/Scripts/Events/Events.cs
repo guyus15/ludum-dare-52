@@ -8,6 +8,8 @@
     public static readonly PlantGrowthEvent s_PlantGrowthEvent = new PlantGrowthEvent();
     public static readonly InitialiseUIEvent s_InitialiseUIEvent = new InitialiseUIEvent();
     public static readonly ActivateHotbarSlotEvent s_ActivateHotbarSlotEvent = new ActivateHotbarSlotEvent();
+    public static readonly EarnMoneyEvent s_EarnMoneyEvent = new EarnMoneyEvent();
+    public static readonly SpendMoneyEvent s_SpendMoneyEvent = new SpendMoneyEvent();
 }
 
 public class PlayerSpawnEvent : GameEvent
@@ -40,4 +42,14 @@ public class InitialiseUIEvent : GameEvent { }
 public class ActivateHotbarSlotEvent : GameEvent
 {
     public int targetSlotIndex;
+}
+
+public class EarnMoneyEvent : GameEvent 
+{
+    public int amount;
+}
+
+public class SpendMoneyEvent : GameEvent
+{
+    public int amount;
 }

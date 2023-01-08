@@ -39,13 +39,11 @@ public class HotbarSlot : MonoBehaviour, IPointerClickHandler
 
     public void Activate()
     {
-        Debug.Log($"Activating slot {Index}");
         _activeImage.enabled = true;
     }
 
     public void Deactivate()
     {
-        Debug.Log($"Deactivating slot {Index}");
         _activeImage.enabled = false;
     }
 

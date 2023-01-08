@@ -27,5 +27,5 @@ public class Planter : MonoBehaviour
             
         }
     }
-    
+    //FOR the GATato have a circle collider that detects when something enters, checks if its a enemy, then makes it it's target until it dies or goes out of range.
 }

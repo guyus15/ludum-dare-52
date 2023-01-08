@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeanSeed : MonoBehaviour
+public class BeanSeed : MonoBehaviour, ISeed
 {
     int currentGrowth = 0;
     int growthStages = 3;
@@ -19,7 +19,6 @@ public class BeanSeed : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -39,7 +38,6 @@ public class BeanSeed : MonoBehaviour
         else
         {
             currentGrowth++;
-            spriteRenderer.sprite = sprites[currentGrowth];
         }
     }
 }

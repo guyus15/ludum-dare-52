@@ -106,4 +106,15 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
         PlayerDeathEvent deathEvt = Events.s_PlayerDeathEvent;
         EventManager.Broadcast(deathEvt);
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.transform.TryGetComponent<IInteractable>(out var objectInteractable))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                objectInteractable.Interact();
+            }
+        }
+    }
 }

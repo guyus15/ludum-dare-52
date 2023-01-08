@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class BeanPlant : MonoBehaviour, PlantInterface
@@ -24,7 +22,8 @@ public class BeanPlant : MonoBehaviour, PlantInterface
             }
         }*/
     }
-    public void harvest()
+
+    public void Harvest()
     {
         //Give items and destroy self.
         var seed = Resources.Load<Item>("Items/Scriptable Objects/BeanSeed");

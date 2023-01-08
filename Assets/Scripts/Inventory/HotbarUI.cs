@@ -69,8 +69,6 @@ public class HotbarUI : MonoBehaviour
     {
         _currentActiveSlot = evt.targetSlotIndex;
 
-        Debug.Log($"current active slot is {_currentActiveSlot}");
-
         UpdateUI();
     }
 }

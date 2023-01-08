@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Bean Seed
   icon: {fileID: 21300000, guid: a43bcd47cd287ad479782930e92f4d5e, type: 3}
   itemObject: {fileID: 0}
+  price: 100
+  purchasable: 1

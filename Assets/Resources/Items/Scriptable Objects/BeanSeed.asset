@@ -17,3 +17,4 @@ MonoBehaviour:
   itemObject: {fileID: 0}
   price: 100
   purchasable: 1
+  sellable: 1

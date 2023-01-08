@@ -56,6 +56,8 @@ public class ShopUI : MonoBehaviour
 
     private void Open(OpenShopEvent evt)
     {
+        Shop.instance.onUpdateUICallback?.Invoke();
+
         if (_shopExists)
         {
             _shopUI.SetActive(true);

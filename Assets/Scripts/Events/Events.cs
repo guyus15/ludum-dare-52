@@ -13,6 +13,8 @@ public static class Events
     public static readonly EarnMoneyEvent s_EarnMoneyEvent = new EarnMoneyEvent();
     public static readonly SpendMoneyEvent s_SpendMoneyEvent = new SpendMoneyEvent();
     public static readonly OpenShopEvent s_OpenShopEvent = new OpenShopEvent();
+    public static readonly OpenMerchantEvent s_OpenMerchantEvent = new OpenMerchantEvent();
+
 }
 
 public class PlayerSpawnEvent : GameEvent
@@ -58,3 +60,5 @@ public class SpendMoneyEvent : GameEvent
 }
 
 public class OpenShopEvent : GameEvent { }
+
+public class OpenMerchantEvent : GameEvent { }

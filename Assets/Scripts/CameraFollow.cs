@@ -22,6 +22,8 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
+        if (_target == null) return;
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 moveDelta = mousePosition - _lastTargetPosition;
 

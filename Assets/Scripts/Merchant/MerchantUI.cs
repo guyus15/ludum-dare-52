@@ -24,6 +24,8 @@ public class MerchantUI : MonoBehaviour
 
         _merchantUI.SetActive(true);
 
+        _merchantMessage = GameObject.Find("MerchantMessage");
+
         _merchant = Merchant.instance;
 
         _merchant.onUpdateUICallback += UpdateUI;

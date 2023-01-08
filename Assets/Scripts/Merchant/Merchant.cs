@@ -39,8 +39,6 @@ public class Merchant : MonoBehaviour
 
     public void Sell(Item item)
     {
-        Debug.Log("Slling");
-
         int price = item.price;
 
         Inventory.instance.Remove(item);

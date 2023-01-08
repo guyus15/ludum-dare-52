@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour, IDamagable, IMoveable
 
     public void Move()
     {
+        if (_target == null) return;
+
         _agent.SetDestination(_target.transform.position);
 
         Vector3 targetDir = _target.transform.position - transform.position;

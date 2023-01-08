@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class UIManager : MonoBehaviour
     public GameObject HotbarUI { get; private set; }
     public GameObject ShopUI { get; private set; }
     public GameObject MerchantUI { get; private set; }
+
+    private GameObject _gameOverScreen;
 
     private GameObject _canvas;
 
@@ -21,8 +24,17 @@ public class UIManager : MonoBehaviour
         instance = this;
 
         _canvas = GameObject.Find("Canvas");
+
+        EventManager.AddListener<PlayerDeathEvent>(HandlePlayerDeath);
     }
     #endregion
+
+    private void Start()
+    {
+        _gameOverScreen = Instantiate(Resources.Load<GameObject>("UI/GameOverMenu"));
+        _gameOverScreen.transform.SetParent(_canvas.transform, false);
+        _gameOverScreen.SetActive(false);
+    }
 
     public void InitialiseUI()
     {
@@ -43,5 +55,19 @@ public class UIManager : MonoBehaviour
 
         InitialiseUIEvent initialiseUiEvt = Events.s_InitialiseUIEvent;
         EventManager.Broadcast(initialiseUiEvt);
+    }
+
+    private void HandlePlayerDeath(PlayerDeathEvent evt)
+    {
+        EventManager.RemoveListener<PlayerDeathEvent>(HandlePlayerDeath);
+
+        StartCoroutine(ShowGameOverScreen());
+    }
+
+    IEnumerator ShowGameOverScreen()
+    {
+        yield return new WaitForSecondsRealtime(3);
+
+        _gameOverScreen.SetActive(true);
     }
 }

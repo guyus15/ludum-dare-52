@@ -112,6 +112,8 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
     {
         PlayerDeathEvent deathEvt = Events.s_PlayerDeathEvent;
         EventManager.Broadcast(deathEvt);
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

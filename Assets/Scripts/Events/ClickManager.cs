@@ -13,11 +13,15 @@ public class ClickManager : MonoBehaviour {
             
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit.collider != null) {
-                Debug.Log(hit.collider.gameObject.name);
-                BeanPlant instance = hit.collider.gameObject.GetComponent<BeanPlant>();
-                if (instance != null)
+                string nameOfHitObject = hit.collider.gameObject.name;
+                Debug.Log(nameOfHitObject);
+                if (nameOfHitObject == "BeanPlant(Clone)")
                 {
-                    instance.harvest();
+                    BeanPlant instance = hit.collider.gameObject.GetComponent<BeanPlant>();
+                    if (instance != null)
+                    {
+                        instance.harvest();
+                    }
                 }
                 else
                 {

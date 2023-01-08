@@ -38,6 +38,7 @@ public class BeanSeed : MonoBehaviour, ISeed
         else
         {
             currentGrowth++;
+            spriteRenderer.sprite = sprites[currentGrowth];
         }
     }
 }

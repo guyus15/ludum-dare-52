@@ -1,4 +1,6 @@
-﻿public static class Events
+﻿using UnityEngine.UIElements;
+
+public static class Events
 {
     public static readonly PlayerSpawnEvent s_PlayerSpawnEvent = new PlayerSpawnEvent();
     public static readonly PlayerGainHealthEvent s_PlayerGainHealthEvent = new PlayerGainHealthEvent();
@@ -8,6 +10,9 @@
     public static readonly PlantGrowthEvent s_PlantGrowthEvent = new PlantGrowthEvent();
     public static readonly InitialiseUIEvent s_InitialiseUIEvent = new InitialiseUIEvent();
     public static readonly ActivateHotbarSlotEvent s_ActivateHotbarSlotEvent = new ActivateHotbarSlotEvent();
+    public static readonly EarnMoneyEvent s_EarnMoneyEvent = new EarnMoneyEvent();
+    public static readonly SpendMoneyEvent s_SpendMoneyEvent = new SpendMoneyEvent();
+    public static readonly OpenShopEvent s_OpenShopEvent = new OpenShopEvent();
 }
 
 public class PlayerSpawnEvent : GameEvent
@@ -41,3 +46,15 @@ public class ActivateHotbarSlotEvent : GameEvent
 {
     public int targetSlotIndex;
 }
+
+public class EarnMoneyEvent : GameEvent 
+{
+    public int amount;
+}
+
+public class SpendMoneyEvent : GameEvent
+{
+    public int amount;
+}
+
+public class OpenShopEvent : GameEvent { }

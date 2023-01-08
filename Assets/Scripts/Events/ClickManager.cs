@@ -2,8 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class ClickManager : MonoBehaviour {
-    void start() {
-    }
+
     void Update () {
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -15,7 +14,7 @@ public class ClickManager : MonoBehaviour {
                 BeanPlant instance = hit.collider.gameObject.GetComponent<BeanPlant>();
                 if (instance != null)
                 {
-                    instance.harvest();
+                    instance.Harvest();
                 }
             }
         }

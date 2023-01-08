@@ -25,7 +25,6 @@ public class PlantEventBroadcaster : MonoBehaviour
     }
     // Update is called once per second
     void UpdateEveryTenSecond(){
-        Debug.Log("Grow event");
         EventManager.Broadcast(growthEvt);
     }
 

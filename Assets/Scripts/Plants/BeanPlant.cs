@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class BeanPlant : MonoBehaviour, PlantInterface
+
+public class BeanPlant : MonoBehaviour, IPlant
 {
     // Start is called before the first frame update
     void Start()
@@ -20,12 +18,13 @@ public class BeanPlant : MonoBehaviour, PlantInterface
             Debug.Log("hit something");
             if(hit.transform.name=="BeanPlant"){
                 Debug.Log("HIT!");
-                harvest();
+                Harvest();
             }
             }
         }
     }
-    public void harvest()
+
+    public void Harvest()
     {
         //Give items and destroy self.
         var seed = Resources.Load<Item>("Items/Scriptable Objects/BeanSeed");

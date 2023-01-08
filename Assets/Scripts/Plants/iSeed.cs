@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface iSeed
+public interface ISeed
 {
-    public void advanceStage();
+    public void AdvanceStage(PlantGrowthEvent evt);
 }

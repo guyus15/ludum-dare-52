@@ -38,7 +38,6 @@ public class BeanSeed : MonoBehaviour, ISeed
         else
         {
             currentGrowth++;
-            Debug.Log("Growing!");
         }
     }
 }

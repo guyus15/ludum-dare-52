@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Crop Seed
   icon: {fileID: 21300000, guid: a43bcd47cd287ad479782930e92f4d5e, type: 3}
   itemObject: {fileID: 374882497597094763, guid: 9df88146b1859ee4285e08c1d6a96663, type: 3}
+  price: 10
+  purchasable: 1

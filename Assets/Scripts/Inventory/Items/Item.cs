@@ -12,7 +12,7 @@ public class Item : ScriptableObject
     public virtual void Use()
     {
         // Use the item
-        Debug.Log($"Using {name}");
+        Equipment.instance.Equip(this);
     }
 
     public virtual void Buy()

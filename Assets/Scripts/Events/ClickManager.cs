@@ -22,15 +22,15 @@ public class ClickManager : MonoBehaviour {
                         instance.Harvest();
                     }
                 }
-                else
-                {
-                    Grid gridObject;
-                    gridObject = GameObject.Find("Grid").GetComponent<Grid>();
-                    Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
-                    //Planter.plant(cellPosition);
-                    Debug.Log(cellPosition);
-                    
-                }
+            }
+            else
+            {
+                Grid gridObject;
+                gridObject = GameObject.Find("Grid").GetComponent<Grid>();
+                Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
+                //Planter.plant(cellPosition);
+                Debug.Log(cellPosition);
+                
             }
         }
     }

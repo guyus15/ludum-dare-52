@@ -29,6 +29,7 @@ public class Planter : MonoBehaviour
 
                     // Remove this item from their inventory
                     Inventory.instance.Remove(currentItem);
+                    Equipment.instance.ClearEquipment();
                 }
                 
             }

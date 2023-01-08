@@ -23,4 +23,9 @@ public class Equipment : MonoBehaviour
     {
         CurrentlyActiveItem = item;
     }
+
+    public void ClearEquipment()
+    {
+        CurrentlyActiveItem = null;
+    }
 }

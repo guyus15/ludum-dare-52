@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30986950b94eaf241b81e5547c2384cf, type: 3}
   m_Name: Bean
   m_EditorClassIdentifier: 
-  itemName: New Item
+  itemName: Bean Plant
   icon: {fileID: -1425674086, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
   itemObject: {fileID: 1406096573617222959, guid: 60405dafbd3171641b0c2245e6dc9c7b, type: 3}
   itemType: 1
   price: 50
   purchasable: 0
-  sellable: 0
+  sellable: 1

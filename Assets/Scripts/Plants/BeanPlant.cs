@@ -1,6 +1,6 @@
 using UnityEngine;
-
-public class BeanPlant : MonoBehaviour, IPlant
+using UnityEngine.SceneManagement;
+public class BeanPlant : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -11,17 +11,16 @@ public class BeanPlant : MonoBehaviour, IPlant
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        /*if(Input.GetMouseButtonDown(0)){
             Ray ray=Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray,out hit)){
             Debug.Log("hit something");
             if(hit.transform.name=="BeanPlant"){
-                Debug.Log("HIT!");
-                Harvest();
+                harvest();
             }
             }
-        }
+        }*/
     }
 
     public void Harvest()

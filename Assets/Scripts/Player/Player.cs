@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour, IMoveable, IDamagable
 {
@@ -11,12 +13,19 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
     public int CurrentHealth { get; private set; }
 
     private bool _canBeDamaged;
-    private Rigidbody2D _rb2d;
+    private float _moveSmoothingFactor = 0.3f;
+    private NavMeshAgent _agent;
+    private Animator _animator;
 
     void Start()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
-        _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _agent= GetComponent<NavMeshAgent>();
+        _agent.speed = MoveSpeed;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+
+        _animator = GetComponent<Animator>();
 
         CurrentHealth = MaxHealth;
 
@@ -41,17 +50,30 @@ public class Player : MonoBehaviour, IMoveable, IDamagable
 
     public void Move()
     {
-        _rb2d.velocity = new Vector2(Input.GetAxis("Horizontal") * MoveSpeed, Input.GetAxis("Vertical") * MoveSpeed);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        bool facingLeft = horizontal < 0;
+        bool facingRight = horizontal > 0;
+        bool facingUp = vertical > 0;
+        bool facingDown = vertical < 0;
 
-        mousePosition.x -= playerScreenPosition.x;
-        mousePosition.y -= playerScreenPosition.y;
+        Vector3 movement = new Vector3(horizontal, vertical, 0.0f);
 
-        float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+        var agentDrift = 0.0001f; // minimal
+        var driftPos = movement + (Vector3)(agentDrift * Random.insideUnitCircle);
+        _agent.Move(driftPos * Time.deltaTime * _agent.speed);
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.position = Vector3.Lerp(transform.position, _agent.nextPosition, _moveSmoothingFactor);
+
+        // Update animator
+        _animator.SetFloat("HorizontalMovement", horizontal);
+        _animator.SetFloat("VerticalMovement", vertical);
+        _animator.SetBool("IsRunning", horizontal != 0 || vertical != 0);
+        _animator.SetBool("FacingLeft", facingLeft);
+        _animator.SetBool("FacingRight", facingRight);
+        _animator.SetBool("FacingUp", facingUp);
+        _animator.SetBool("FacingDown", facingDown);
     }
 
     public void AddHealth(int amount)

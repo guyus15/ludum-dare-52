@@ -27,16 +27,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        // Load purchasable items.
-        Item[] items = Resources.LoadAll<Item>("Items/Scriptable Objects");
-
-        items.ToList().ForEach(item =>
-        {
-            if (item.purchasable)
-            {
-                Add(item);
-            }
-        });
+        onUpdateUICallback += CheckItems;
 
         StartCoroutine(InvokeCallback());
     }
@@ -66,5 +57,21 @@ public class Shop : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         onUpdateUICallback?.Invoke();
+    }
+
+    private void CheckItems()
+    {
+        itemsForSale.Clear();
+
+        // Load purchasable items.
+        Item[] items = Resources.LoadAll<Item>("Items/Scriptable Objects");
+
+        items.ToList().ForEach(item =>
+        {
+            if (item.purchasable)
+            {
+                Add(item);
+            }
+        });
     }
 }

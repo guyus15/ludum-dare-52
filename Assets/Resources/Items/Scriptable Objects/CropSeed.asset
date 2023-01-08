@@ -17,3 +17,4 @@ MonoBehaviour:
   itemObject: {fileID: 374882497597094763, guid: 9df88146b1859ee4285e08c1d6a96663, type: 3}
   price: 10
   purchasable: 1
+  sellable: 1

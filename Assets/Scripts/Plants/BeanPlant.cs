@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BeanPlant : MonoBehaviour, PlantInterface
+public class BeanPlant : MonoBehaviour, IPlant
 {
     // Start is called before the first frame update
     void Start()
@@ -16,7 +14,7 @@ public class BeanPlant : MonoBehaviour, PlantInterface
         
     }
 
-    public void harvest()
+    public void Harvest()
     {
         //Give items and destroy self.
     }

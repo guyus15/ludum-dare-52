@@ -13,12 +13,20 @@ public class Planter : MonoBehaviour
         {
             Vector3 worldPos = gridObject.CellToWorld(cellPosition); //Get actual world position
             coordsBeingUsed.Add(cellPosition); //Add to the list
-            Item currentItem;
-            /*if (currentItem.itemType == Plantable)
+            Item currentItem = Equipment.instance.CurrentlyActiveItem;
+            if (currentItem != null)
             {
-                var seed = currentItem.itemObject;
-                Instantiate(seed, worldPos, transform.rotation);
-            }*/
+                if (currentItem.itemType == ItemType.Plantable)
+                {
+                    var seed = currentItem.itemObject;
+                    if (seed == null)
+                    {
+                        Debug.Log("currentItem.itemType is null");
+                    }
+                    Instantiate(seed, worldPos, transform.rotation);
+                }
+                
+            }
             //var newBeanSeed = Resources.Load<Seed>("Prefabs/Plants/BeanPlant");
             //Instantiate(newBeanSeed, transform.position, transform.rotation);
         }

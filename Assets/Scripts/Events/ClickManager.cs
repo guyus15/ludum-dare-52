@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ClickManager : MonoBehaviour {
-
+    Planter planter;
+    void Start() {
+        planter = GameObject.Find("Planter").GetComponent<Planter>();
+    }
     void Update () {
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -28,11 +31,11 @@ public class ClickManager : MonoBehaviour {
                 Grid gridObject;
                 gridObject = GameObject.Find("Grid").GetComponent<Grid>();
                 Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
-                //Planter.plant(cellPosition);
                 Debug.Log(cellPosition);
-                
+                planter.Plant(cellPosition, gridObject);
             }
+            
         }
     }
-
 }
+

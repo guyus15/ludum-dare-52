@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
@@ -25,6 +26,13 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item>();
 
+    void Start()
+    {
+        var seed = Resources.Load<Item>("Items/Scriptable Objects/BeanSeed");
+        Add(seed);
+        StartCoroutine(InvokeCallback());
+    }
+
     public bool Add(Item item)
     {
         if (items.Count >= defaultSpace)
@@ -44,5 +52,11 @@ public class Inventory : MonoBehaviour
         items.Remove(item);
 
         onItemChangedCallback?.Invoke();
+    }
+
+    IEnumerator InvokeCallback()
+    {
+        yield return new WaitForSeconds(2.1f);
+        onItemChangedCallback.Invoke();
     }
 }

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8585040885631576571, guid: b34f4d4948219ac408ff1460d933e0e9, type: 3}
   _initialSpawnPeriod: 30
+  _initialSpawnDelay: 30

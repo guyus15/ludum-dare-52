@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
 
     [SerializeField] private float _initialSpawnPeriod;
+    [SerializeField] private float _initialSpawnDelay;
     private float _currentSpawnPeriod;
     private float _currentTime;
 
@@ -15,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         // Give each spawner a random offset so they don't all spawn at the same time.
-        _currentTime = Random.value * _initialSpawnPeriod;
+        _currentTime = (Random.value * _initialSpawnPeriod) - _initialSpawnDelay;
         _currentSpawnPeriod = _initialSpawnPeriod;
 
         _enemyManager = FindObjectOfType<EnemyManager>();

@@ -5,7 +5,23 @@ using System.Linq;
 
 public class Planter : MonoBehaviour
 {
-    public List<Vector3Int> coordsBeingUsed = new List<Vector3Int>();
+    #region Singleton
+    public static Planter instance;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("An instance of Planter already exists");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
+    public Grid grid;
+
+    private List<Vector3Int> coordsBeingUsed = new List<Vector3Int>();
     // NavMesh.SamplePosition if true seed can be placed
     public void Plant(Vector3Int cellPosition, Grid gridObject)
     {

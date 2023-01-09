@@ -21,7 +21,9 @@ public class GunPlantseed : MonoBehaviour
 
     public void AdvanceStage(PlantGrowthEvent evt) 
     {
-        if (currentGrowth >= growthStages)
+        currentGrowth++;
+
+        if (currentGrowth > growthStages - 1)
         {
             //Destroy self and put plant in it's place.
             var newPlant = Resources.Load<GunPlant>("Prefabs/Plants/GunPlant");
@@ -32,7 +34,6 @@ public class GunPlantseed : MonoBehaviour
         }
         else
         {
-            currentGrowth++;
             spriteRenderer.sprite = sprites[currentGrowth];
         }
     }

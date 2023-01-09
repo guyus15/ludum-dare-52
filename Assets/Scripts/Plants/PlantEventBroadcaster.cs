@@ -11,13 +11,13 @@ public class PlantEventBroadcaster : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-
+        
     }
     void Update(){
         // If the next update is reached
         if(Time.time>=nextUpdate){
             // Change the next update (current second+1)
-            nextUpdate=Mathf.FloorToInt(Time.time)+1; //CHANGE THIS BACK TO 10
+            nextUpdate=Mathf.FloorToInt(Time.time)+5; //CHANGE THIS BACK TO 10
             // Call your fonction
             UpdateEveryTenSecond();
         }

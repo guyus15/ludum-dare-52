@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: -160504694, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
   - {fileID: -1228045010, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
   - {fileID: 159342648, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
-  - {fileID: -1049957609, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
+  - {fileID: 159342648, guid: e02e12d456b453243906f2310e81a8f8, type: 3}
   spriteRenderer: {fileID: 0}
   newSprite: {fileID: 0}
 --- !u!212 &881075475019003473

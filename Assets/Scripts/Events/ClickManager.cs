@@ -18,7 +18,8 @@ public class ClickManager : MonoBehaviour {
 
             if (hit.collider != null) {
                 string nameOfHitObject = hit.collider.gameObject.name;
-                Debug.Log(nameOfHitObject);
+                string tagOfHitObject = hit.collider.gameObject.tag;
+                Debug.Log(nameOfHitObject + tagOfHitObject);
                 if (nameOfHitObject == "BeanPlant(Clone)")
                 {
                     BeanPlant instance = hit.collider.gameObject.GetComponent<BeanPlant>();
@@ -29,15 +30,24 @@ public class ClickManager : MonoBehaviour {
                         planter.removeCoordFromList(cellPosition);
                     }
                 }
+                else if (tagOfHitObject == "PlantableZone") //Keep this one at the bottom
+                {
+                    engagePlanter(mousePos2D);
+                }
             }
             else
             {
-                Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
-                Debug.Log(cellPosition);
-                planter.Plant(cellPosition, gridObject);
+                engagePlanter(mousePos2D);
             }
             
         }
+    }
+
+    void engagePlanter(Vector2 mousePos2D)
+    {
+        Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
+        Debug.Log(cellPosition);
+        planter.Plant(cellPosition, gridObject);
     }
 }
 

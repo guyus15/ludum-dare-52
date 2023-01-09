@@ -8,9 +8,9 @@ public class RadiusVisualiser : MonoBehaviour
     private int _segments = 50;
     private LineRenderer _line;
 
-    void Start()
+    void Awake()
     {
-        _line = gameObject.GetComponent<LineRenderer>();
+        _line = GetComponent<LineRenderer>();
 
         _line.positionCount = _segments + 1;
         _line.useWorldSpace = false;

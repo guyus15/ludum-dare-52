@@ -35,8 +35,6 @@ public class ClickManager : MonoBehaviour {
             }
             else
             {
-
-                Debug.Log("Area collider is null");
                 engagePlanter(mousePos2D);
             }
             

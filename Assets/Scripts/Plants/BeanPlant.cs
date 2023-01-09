@@ -30,6 +30,11 @@ public class BeanPlant : MonoBehaviour
         var crop = Resources.Load<Item>("Items/Scriptable Objects/Bean");
         Inventory.instance.Add(seed);
         Inventory.instance.Add(crop);
+
+        // Remove coordinate from used coords.
+        Vector3Int tileMapCoord = Planter.instance.grid.WorldToCell(transform.position);
+        Planter.instance.removeCoordFromList(tileMapCoord);
+
         Destroy(gameObject);
     }
 }

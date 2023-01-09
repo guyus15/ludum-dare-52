@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ClickManager : MonoBehaviour {
-    Planter planter;
     Grid gridObject;
     void Start() {
-        planter = GameObject.Find("Planter").GetComponent<Planter>();
         gridObject = GameObject.Find("Grid").GetComponent<Grid>();
     }
     void Update () {
@@ -19,7 +17,7 @@ public class ClickManager : MonoBehaviour {
             if (hit.collider != null) {
                 string nameOfHitObject = hit.collider.gameObject.name;
                 string tagOfHitObject = hit.collider.gameObject.tag;
-                Debug.Log(nameOfHitObject + tagOfHitObject);
+
                 if (nameOfHitObject == "BeanPlant(Clone)")
                 {
                     BeanPlant instance = hit.collider.gameObject.GetComponent<BeanPlant>();
@@ -27,16 +25,18 @@ public class ClickManager : MonoBehaviour {
                     {
                         instance.Harvest();
                         Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
-                        planter.removeCoordFromList(cellPosition);
+                        Planter.instance.removeCoordFromList(cellPosition);
                     }
                 }
-                else if (tagOfHitObject == "PlantableZone") //Keep this one at the bottom
+                else
                 {
                     engagePlanter(mousePos2D);
                 }
             }
             else
             {
+
+                Debug.Log("Area collider is null");
                 engagePlanter(mousePos2D);
             }
             
@@ -46,8 +46,7 @@ public class ClickManager : MonoBehaviour {
     void engagePlanter(Vector2 mousePos2D)
     {
         Vector3Int cellPosition = gridObject.WorldToCell(mousePos2D);
-        Debug.Log(cellPosition);
-        planter.Plant(cellPosition, gridObject);
+        Planter.instance.Plant(cellPosition, gridObject);
     }
 }
 
